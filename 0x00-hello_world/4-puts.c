@@ -3,14 +3,15 @@
 /**
  * main - Entry point
  *
- * Return: Always 0 (success)
+ * Return: Always 0 (Success)
+ *
  */
+
 int main(void)
+
 {
-	/*inputing the output*/
-	char myVar[] = "\"Programming is like building a multilingual puzzle";
-	/*using puts to output myVar*/
-	puts(myVar);
-	
+	puts("\"Programming is like building a multilingual puzzle");
+
 	return (0);
+
 }	
