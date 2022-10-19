@@ -1,1 +1,28 @@
-typedef int make_iso_compiler_happy;
+#include <stdio.h>
+
+/**
+ * main - prints the value of even fibonacci
+ * Return: Always 0 if successful
+ */
+
+int main(void)
+{
+	float tot_sum;
+	unsigned long fib1 = 0, fib2 = 1, fibsum;
+
+	while (1)
+	{
+		fibsum = fib1 + fib2;
+		if (fibsum > 4000000)
+			break;
+		if ((fibsum % 2) == 0)
+			tot_sum += fibsum;
+
+		fib1 = fib2;
+		fib2 = fibsum;
+
+	}
+	printf("%0.f\n", tot_sum);
+
+	return (0);
+}
