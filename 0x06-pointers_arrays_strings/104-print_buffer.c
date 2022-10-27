@@ -2,15 +2,18 @@
 #include <stdio.h>
 
 /**
+ * print_line - prints a s bytes of a buffer
  * print_buffer - prints a buffer
- * @b: buffer to print
- * @size: size of buffer
+ * @c: buffer to print
+ * @s: bytes of buffer to print
+ * @l: line of buffer to print
  *
  * Return: void
  */
+
 void print_line(char *c, int s, int l)
 {
-	int j,k;
+	int j, k;
 
 	for (j = 0; j <= 9; j++)
 	{
@@ -18,7 +21,7 @@ void print_line(char *c, int s, int l)
 			printf("%02x", c[l * 10 + j]);
 		else
 			printf(" ");
-		if(j % 2)
+		if (j % 2)
 			putchar(' ');
 	}
 	for (k = 0; k <= s; k++)
@@ -26,7 +29,7 @@ void print_line(char *c, int s, int l)
 		if (c[l * 10 + k] > 31 && c[l * 10 + k] < 127)
 			putchar(c[l * 10 + k]);
 		else
-			putchar('.');
+			putchar(' . ');
 	}
 }
 
@@ -47,11 +50,11 @@ void print_buffer(char *b, int size)
 		printf("%08x: ", i * 10);
 			if (i < size / 10)
 			{
-				print_line(b,9, i);
+				print_line(b, 9, i);
 			}
 			else
 			{
-				print_line(b, size % 10 -1, i);
+				print_line(b, size % 10 - 1, i);
 			}
 			putchar('\n');
 	}
