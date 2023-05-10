@@ -1,24 +1,28 @@
 #include "search_algos.h"
 
 /**
- * interpolation_search - Function that searches for a value in a sorted array
- *                        of integers using the Interpolation search algorithm.
+ * interpolation_search - Searches for a value in a sorted array
+ *                        of integers using interpolation search.
+ * @array: A pointer to the first element of the array to search.
+ * @size: The number of elements in the array.
+ * @value: The value to search for.
  *
- * @array: Pointer to the first element of the array to search in.
- * @size: Number of elements in the array.
- * @value: Value to search for in the array.
+ * Return: If the value is not present or the array is NULL, -1.
+ *         Otherwise, the first index where the value is located.
  *
- * Return: The first index where value is located,
- *         or -1 if value is not found or if array is NULL.
+ * Description: Prints the value every time it is compared in the array.
  */
 int interpolation_search(int *array, size_t size, int value)
 {
-	size_t low = 0, high = size - 1, pos;
+	size_t low, high, pos;
 
-	if (array == NULL)
-		return(-1);
+	if (array == NULL || size == 0)
+		return (-1);
 
-	while (low <= high && value >= array[low] && value <= array[high])
+	low = 0;
+	high = size - 1;
+
+	for (; low <= high && value >= array[low] && value <= array[high];)
 	{
 		if (low == high)
 		{
@@ -28,7 +32,6 @@ int interpolation_search(int *array, size_t size, int value)
 		}
 
 		pos = low + (((double)(high - low) / (array[high] - array[low])) * (value - array[low]));
-
 		printf("Value checked array[%lu] = [%d]\n", pos, array[pos]);
 
 		if (array[pos] == value)
