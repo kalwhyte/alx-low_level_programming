@@ -1,90 +1,71 @@
 #include "search_algos.h"
 
 /**
- * exponential_search - Function that searches for a value in a sorted array
- *                      of integers using the Exponential search algorithm.
- *
- * @array: Pointer to the first element of the array to search in.
- * @size: Number of elements in the array.
- * @value: Value to search for in the array.
- *
- * Return: The first index where value is located,
- *         or -1 if value is not found or if array is NULL.
- */
-int exponential_search(int *array, size_t size, int value)
+  * _binary_search - Searches for a value in a sorted array
+  *                  of integers using binary search.
+  * @array: A pointer to the first element of the array to search.
+  * @left: The starting index of the [sub]array to search.
+  * @right: The ending index of the [sub]array to search.
+  * @value: The value to search for.
+  *
+  * Return: If the value is not present or the array is NULL, -1.
+  *         Otherwise, the index where the value is located.
+  *
+  * Description: Prints the [sub]array being searched after each change.
+  */
+int _binary_search(int *array, size_t left, size_t right, int value)
 {
-	size_t bound = 1, low, high;
+	size_t whyte;
 
 	if (array == NULL)
 		return (-1);
 
-	while (bound < size && array[bound] < value)
+	while (right >= left)
 	{
-		printf("Value checked array[%lu] = [%d]\n", bound, array[bound]);
-		bound *= 2;
-	}
+		printf("Searching in array: ");
+		for (whyte = left; whyte < right; whyte++)
+			printf("%d, ", array[whyte]);
+		printf("%d\n", array[whyte]);
 
-	low = bound / 2;
-	if (bound < size - 1)
-		high = bound;
-	else
-		high = size - 1;
-
-	printf("Value found between indexes [%lu] and [%lu]\n", low, high);
-
-	return (binary_search(array, low, high, value));
-}
-
-/**
- * binary_search - Function that searches for a value in a sorted subarray
- *                 of integers using the Binary search algorithm.
- *
- * @array: Pointer to the first element of the subarray to search in.
- * @low: Lower bound index of the subarray.
- * @high: Upper bound index of the subarray.
- * @value: Value to search for in the subarray.
- *
- * Return: The index where value is located,
- *         or -1 if value is not found.
- */
-int binary_search(int *array, size_t low, size_t high, int value)
-{
-	size_t mid;
-
-	while (low <= high)
-	{
-		print_subarray(array, low, high);
-		mid = (low + high) / 2;
-
-		if (array[mid] == value)
-			return (mid);
-
-		if (array[mid] < value)
-			low = mid + 1;
+		whyte = left + (right - left) / 2;
+		if (array[whyte] == value)
+			return (whyte);
+		if (array[whyte] < value)
+			left = whyte + 1;
 		else
-			high = mid - 1;
+			right = whyte - 1;
 	}
 
 	return (-1);
 }
 
 /**
- * print_subarray - Function that prints the elements of a subarray.
+ * exponential_search - Searches for a value in a sorted array
+ *                 of integers using exponential search.
  *
- * @array: Pointer to the first element of the array.
- * @low: Lower bound index of the subarray.
- * @high: Upper bound index of the subarray.
+ * @array: A pointer to the first element of the array to search.
+ * @size: The number of elements in the array.
+ * @value: Value to search for in the array.
+ *
+ * Return: If the value is not present or the array is NULL, -1.
+ *         Otherwise, the index where the value is located.
+ *
+ * Description: Prints a value every time it is compared in the array.
  */
-void print_subarray(int *array, size_t low, size_t high)
+int exponential_search(int *array, size_t size, int value)
 {
-	size_t i;
+	size_t whyte = 0, right;
 
-	printf("Searching in array:");
-	for (i = low; i <= high; i++)
+	if (array == NULL)
+		return (-1);
+
+	if (array[0] != value)
 	{
-		printf(" %d", array[i]);
-		if (i < high)
-			printf(",");
+		for (whyte = 1; whyte < size && array[whyte] <= value; whyte = whyte * 2)
+			printf("Value checked array[%ld] = [%d]\n", whyte, array[whyte]);
 	}
-	printf("\n");
+
+	right = whyte < size ? whyte : size - 1;
+	printf("Value found between indexes [%ld] and [%ld]\n", whyte / 2, right);
+	return (_binary_search(array, whyte / 2, right, value));
 }
