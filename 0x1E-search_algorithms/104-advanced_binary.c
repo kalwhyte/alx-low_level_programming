@@ -15,20 +15,23 @@
  */
 int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 {
-	size_t whyte;
+	size_t whyte = left;
 
-	if (array == NULL)
+	if (right < left)
 		return (-1);
 
-	while (left <= right)
+	while (whyte <= right)
 	{
 		printf("Searching in array: ");
-		for (whyte = left; whyte < right; whyte++)
+		whyte = left;
+		while (whyte < right)
+		{
 			printf("%d, ", array[whyte]);
+			whyte++;
+		}
 		printf("%d\n", array[whyte]);
 
 		whyte = left + (right - left) / 2;
-
 		if (array[whyte] == value && (whyte == left || array[whyte - 1] != value))
 			return (whyte);
 		else if (array[whyte] >= value)
@@ -41,8 +44,8 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 }
 
 /**
- * advanced_binary - Searches for a value in a sorted array
- *                   of integers using advanced binary search.
+ * advanced_binary - Searches for a value in a sorted array of integers
+ *                   using advanced binary search.
  * @array: A pointer to the first element of the array to search.
  * @size: The number of elements in the array.
  * @value: The value to search for.
@@ -50,7 +53,7 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
  * Return: If the value is not present or the array is NULL, -1.
  *         Otherwise, the first index where the value is located.
  *
- * Description: Prints the [sub]array being searched after each change.
+ * Description: Prints the sub-array being searched after each change.
  */
 int advanced_binary(int *array, size_t size, int value)
 {
